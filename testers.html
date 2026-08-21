@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Prueba Battle Gym en Android: más de 800 ejercicios, rutinas sencillas y funcionamiento sin conexión." />
+  <title>Prueba Battle Gym | Android</title>
+  <style>
+    :root { color-scheme: dark; --bg:#08090d; --panel:#11131a; --line:#292d38; --ink:#f5f3ed; --muted:#a8abb5; --red:#ff4438; --yellow:#ffd45a; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin:0; overflow-x:hidden; background:radial-gradient(circle at 75% 5%,#3a1619 0,transparent 34%),var(--bg); color:var(--ink); font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif; }
+    a { color:inherit; }
+    .wrap { width:min(1120px,calc(100% - 32px)); margin:auto; }
+    header { display:flex; align-items:center; justify-content:space-between; padding:22px 0; }
+    .brand { display:flex; align-items:center; gap:12px; text-decoration:none; font-weight:900; letter-spacing:.08em; }
+    .mark { display:grid; place-items:center; width:46px; height:46px; border-radius:12px; background:linear-gradient(145deg,var(--red),#701316); color:#fff; font-size:1.45rem; box-shadow:0 8px 24px #ff443833; }
+    .lang { display:flex; gap:8px; }
+    .lang button { border:1px solid var(--line); background:#0d0f15; color:var(--ink); padding:8px 12px; border-radius:999px; cursor:pointer; }
+    .lang button[aria-pressed="true"] { border-color:var(--yellow); color:var(--yellow); }
+    .hero { min-height:76vh; display:grid; grid-template-columns:1.05fr .95fr; align-items:center; gap:52px; padding:40px 0 64px; }
+    .eyebrow { color:var(--red); font-weight:850; letter-spacing:.18em; text-transform:uppercase; }
+    h1 { font-size:clamp(3rem,8vw,6.6rem); line-height:.87; letter-spacing:-.06em; margin:18px 0 24px; text-transform:uppercase; }
+    h1 span { color:var(--red); }
+    .lead { color:var(--muted); font-size:clamp(1.05rem,2vw,1.28rem); line-height:1.6; max-width:660px; }
+    .facts { display:flex; flex-wrap:wrap; gap:10px; margin:28px 0; }
+    .facts span { border:1px solid var(--line); background:#101219; padding:9px 12px; border-radius:8px; font-weight:700; }
+    .actions { display:flex; flex-wrap:wrap; gap:12px; }
+    .btn { display:inline-flex; justify-content:center; align-items:center; min-height:52px; padding:0 20px; border-radius:8px; text-decoration:none; font-weight:850; border:1px solid var(--line); }
+    .btn.primary { background:var(--red); border-color:var(--red); color:#fff; box-shadow:0 12px 34px #ff443833; }
+    .phone { position:relative; width:min(390px,86vw); margin:auto; padding:12px; border-radius:38px; border:1px solid #424754; background:#090a0e; box-shadow:0 28px 80px #000a; transform:rotate(2deg); }
+    .screen { min-height:570px; border-radius:28px; padding:28px 22px; background:linear-gradient(160deg,#1b1e27,#0b0d12); }
+    .screen-top { display:flex; justify-content:space-between; color:var(--muted); font-size:.82rem; }
+    .screen h3 { margin:52px 0 8px; font-size:2rem; }
+    .screen .stat { margin:18px 0; padding:18px; border:1px solid var(--line); border-radius:14px; background:#12151d; }
+    .screen .bar { height:10px; margin-top:12px; border-radius:999px; background:linear-gradient(90deg,var(--red) 72%,#292d38 72%); }
+    section { padding:72px 0; }
+    h2 { font-size:clamp(2rem,5vw,3.7rem); margin:0 0 14px; letter-spacing:-.04em; text-transform:uppercase; }
+    .sub { color:var(--muted); max-width:720px; line-height:1.65; margin-bottom:34px; }
+    .steps,.features,.shots { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .card { background:linear-gradient(145deg,#151820,#0d0f14); border:1px solid var(--line); border-radius:14px; padding:24px; }
+    .num { color:var(--yellow); font-size:.85rem; font-weight:900; letter-spacing:.16em; }
+    .card h3 { font-size:1.35rem; margin:12px 0 8px; }
+    .card p { color:var(--muted); line-height:1.55; margin:0; }
+    .feature-icon { font-size:2rem; }
+    .cta { text-align:center; border:1px solid #4a2929; border-radius:20px; padding:52px 24px; background:linear-gradient(135deg,#2b1114,#101219 58%); }
+    .cta .actions { justify-content:center; }
+    .fine { color:var(--muted); font-size:.84rem; line-height:1.55; margin-top:18px; }
+    footer { padding:28px 0 44px; color:var(--muted); display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; border-top:1px solid var(--line); }
+    [data-lang="en"] { display:none; }
+    body.en [data-lang="es"] { display:none; }
+    body.en [data-lang="en"] { display:initial; }
+    @media (max-width:800px) { .hero { grid-template-columns:1fr; text-align:center; } .lead { margin-inline:auto; } .facts,.actions { justify-content:center; } .steps,.features,.shots { grid-template-columns:1fr; } .phone { transform:none; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="#top"><span class="mark" aria-hidden="true">BG</span> BATTLE GYM</a>
+      <div class="lang" aria-label="Idioma"><button id="es" aria-pressed="true">ES</button><button id="en" aria-pressed="false">EN</button></div>
+    </header>
+
+    <main id="top">
+      <div class="hero">
+        <div>
+          <div class="eyebrow"><span data-lang="es">Prueba cerrada para Android</span><span data-lang="en">Android closed test</span></div>
+          <h1><span data-lang="es">Entrena sin<br><span>complicarte</span></span><span data-lang="en">Train without<br><span>the guesswork</span></span></h1>
+          <p class="lead" data-lang="es">Battle Gym reúne 873 ejercicios, búsqueda inteligente y un asistente que crea una primera rutina según tu objetivo y material.</p>
+          <p class="lead" data-lang="en">Battle Gym brings together 873 exercises, smart search and a beginner assistant that builds a first routine around your goal and equipment.</p>
+          <div class="facts"><span>📱 Android</span><span>⚡ Offline</span><span>🌍 ES / EN</span><span>🆓 Gratis / Free</span></div>
+          <div class="actions">
+            <a class="btn primary" href="https://groups.google.com/g/battle-gym-testers" rel="noopener"><span data-lang="es">1. Unirme al grupo</span><span data-lang="en">1. Join the group</span></a>
+            <a class="btn" href="https://play.google.com/apps/testing/com.battlegym.app" rel="noopener"><span data-lang="es">2. Acceder a la prueba</span><span data-lang="en">2. Join the test</span></a>
+          </div>
+        </div>
+        <div class="phone"><div class="screen" role="img" aria-label="Resumen de funciones de Battle Gym"><div class="screen-top"><span>BATTLE GYM</span><span>ES · EN</span></div><h3><span data-lang="es">Tu entrenamiento</span><span data-lang="en">Your workout</span></h3><p class="sub"><span data-lang="es">Rutina sencilla para empezar</span><span data-lang="en">A simple routine to get started</span></p><div class="stat"><strong>873</strong><br><span data-lang="es">ejercicios disponibles</span><span data-lang="en">available exercises</span></div><div class="stat"><strong><span data-lang="es">Progreso</span><span data-lang="en">Progress</span></strong><div class="bar"></div></div><div class="stat">⚡ <span data-lang="es">Funciona sin conexión</span><span data-lang="en">Works offline</span></div></div></div>
+      </div>
+
+      <section>
+        <h2><span data-lang="es">Entrar lleva tres pasos</span><span data-lang="en">Join in three steps</span></h2>
+        <p class="sub" data-lang="es">Usa en todo el proceso la misma cuenta de Google que tienes configurada en Play Store.</p>
+        <p class="sub" data-lang="en">Use the same Google account connected to your Play Store throughout the process.</p>
+        <div class="steps">
+          <article class="card"><div class="num">01</div><h3><span data-lang="es">Únete al grupo</span><span data-lang="en">Join the group</span></h3><p><span data-lang="es">El grupo autoriza tu cuenta para acceder a la prueba cerrada.</span><span data-lang="en">The group authorizes your account for the closed test.</span></p></article>
+          <article class="card"><div class="num">02</div><h3><span data-lang="es">Acepta la prueba</span><span data-lang="en">Opt in</span></h3><p><span data-lang="es">Abre el segundo botón y confirma que quieres participar.</span><span data-lang="en">Open the second button and confirm that you want to participate.</span></p></article>
+          <article class="card"><div class="num">03</div><h3><span data-lang="es">Instala y úsala</span><span data-lang="en">Install and use it</span></h3><p><span data-lang="es">Prueba Battle Gym durante 14 días y envíanos feedback privado y sincero.</span><span data-lang="en">Try Battle Gym for 14 days and send us honest private feedback.</span></p></article>
+        </div>
+      </section>
+
+      <section>
+        <h2><span data-lang="es">La aplicación, de verdad</span><span data-lang="en">The real app</span></h2>
+        <p class="sub"><span data-lang="es">Nada de promesas vacías: puedes explorar ejercicios, filtrar por material y crear una rutina para empezar.</span><span data-lang="en">No empty promises: browse exercises, filter by equipment and build a starter routine.</span></p>
+        <div class="shots">
+          <article class="card"><div class="feature-icon">🔎</div><h3><span data-lang="es">Encuentra ejercicios</span><span data-lang="en">Find exercises</span></h3><p><span data-lang="es">Busca por nombre, músculo, material o dificultad.</span><span data-lang="en">Search by name, muscle, equipment or difficulty.</span></p></article>
+          <article class="card"><div class="feature-icon">🧭</div><h3><span data-lang="es">Crea tu rutina</span><span data-lang="en">Build your routine</span></h3><p><span data-lang="es">Un asistente sencillo te ayuda a elegir y cambiar ejercicios.</span><span data-lang="en">A simple assistant helps you choose and swap exercises.</span></p></article>
+          <article class="card"><div class="feature-icon">📈</div><h3><span data-lang="es">Registra tu progreso</span><span data-lang="en">Track your progress</span></h3><p><span data-lang="es">Apunta peso y repeticiones y compáralos con tu última sesión.</span><span data-lang="en">Log weight and reps and compare them with your last session.</span></p></article>
+        </div>
+      </section>
+
+      <section>
+        <div class="cta">
+          <h2><span data-lang="es">¿Nos ayudas a terminarla?</span><span data-lang="en">Help us finish it</span></h2>
+          <p class="sub" style="margin-inline:auto"><span data-lang="es">Buscamos personas reales, no valoraciones positivas. Tu experiencia nos ayudará a corregir fallos antes del lanzamiento.</span><span data-lang="en">We want real people, not positive ratings. Your experience will help us fix problems before launch.</span></p>
+          <div class="actions"><a class="btn primary" href="https://groups.google.com/g/battle-gym-testers" rel="noopener"><span data-lang="es">Quiero probar Battle Gym</span><span data-lang="en">I want to test Battle Gym</span></a></div>
+          <p class="fine"><span data-lang="es">Participar es gratis. Nunca pedimos una reseña o valoración positiva.</span><span data-lang="en">Participation is free. We never ask for a positive review or rating.</span></p>
+        </div>
+      </section>
+    </main>
+
+    <footer><span>© 2026 Battle Gym · Lokesh Pardo</span><span><a href="./privacy.html">Privacidad / Privacy</a> · <a href="https://www.instagram.com/battel_gym/">Instagram</a></span></footer>
+  </div>
+  <script>
+    const setLang = lang => {
+      document.body.classList.toggle('en', lang === 'en');
+      document.documentElement.lang = lang;
+      document.querySelector('#es').setAttribute('aria-pressed', String(lang === 'es'));
+      document.querySelector('#en').setAttribute('aria-pressed', String(lang === 'en'));
+      localStorage.setItem('battle-gym-lang', lang);
+    };
+    document.querySelector('#es').addEventListener('click', () => setLang('es'));
+    document.querySelector('#en').addEventListener('click', () => setLang('en'));
+    setLang(localStorage.getItem('battle-gym-lang') === 'en' ? 'en' : 'es');
+  </script>
+</body>
+</html>
