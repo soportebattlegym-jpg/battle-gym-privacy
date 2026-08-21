@@ -28,6 +28,13 @@
     .actions { display:flex; flex-wrap:wrap; gap:12px; }
     .btn { display:inline-flex; justify-content:center; align-items:center; min-height:52px; padding:0 20px; border-radius:8px; text-decoration:none; font-weight:850; border:1px solid var(--line); }
     .btn.primary { background:var(--red); border-color:var(--red); color:#fff; box-shadow:0 12px 34px #ff443833; }
+    .btn.store { border-color:var(--yellow); color:var(--yellow); }
+    .account-note { display:flex; align-items:flex-start; gap:10px; max-width:680px; margin:18px 0 0; padding:14px 16px; border:1px solid #574a25; border-radius:10px; background:#211d12; color:#f6e6a7; line-height:1.5; }
+    .browser-note { display:none; margin:0 0 22px; padding:16px; border:1px solid #815338; border-radius:12px; background:#2a1912; color:#ffd7bf; line-height:1.55; }
+    .browser-note.show { display:block; }
+    .step-actions { margin-top:20px; }
+    .step-actions .btn { width:100%; min-height:48px; padding-inline:14px; }
+    .flow-help { margin:24px 0 0; padding:18px; border-left:4px solid var(--yellow); border-radius:0 10px 10px 0; background:#171820; color:var(--muted); line-height:1.6; }
     .phone { position:relative; width:min(390px,86vw); margin:auto; padding:12px; border-radius:38px; border:1px solid #424754; background:#090a0e; box-shadow:0 28px 80px #000a; transform:rotate(2deg); }
     .screen { min-height:570px; border-radius:28px; padding:28px 22px; background:linear-gradient(160deg,#1b1e27,#0b0d12); }
     .screen-top { display:flex; justify-content:space-between; color:var(--muted); font-size:.82rem; }
@@ -50,7 +57,7 @@
     [data-lang="en"] { display:none; }
     body.en [data-lang="es"] { display:none; }
     body.en [data-lang="en"] { display:initial; }
-    @media (max-width:800px) { .hero { grid-template-columns:1fr; text-align:center; } .lead { margin-inline:auto; } .facts,.actions { justify-content:center; } .steps,.features,.shots { grid-template-columns:1fr; } .phone { transform:none; } }
+    @media (max-width:800px) { .hero { grid-template-columns:1fr; text-align:center; } .lead { margin-inline:auto; } .facts,.actions { justify-content:center; } .actions .btn { width:100%; } .account-note { text-align:left; } .steps,.features,.shots { grid-template-columns:1fr; } .phone { transform:none; } }
   </style>
 </head>
 <body>
@@ -68,23 +75,27 @@
           <p class="lead" data-lang="es">Battle Gym reúne 873 ejercicios, búsqueda inteligente y un asistente que crea una primera rutina según tu objetivo y material.</p>
           <p class="lead" data-lang="en">Battle Gym brings together 873 exercises, smart search and a beginner assistant that builds a first routine around your goal and equipment.</p>
           <div class="facts"><span>📱 Android</span><span>⚡ Offline</span><span>🌍 ES / EN</span><span>🆓 Gratis / Free</span></div>
-          <div class="actions">
-            <a class="btn primary" href="https://groups.google.com/g/battle-gym-testers" rel="noopener"><span data-lang="es">1. Unirme al grupo</span><span data-lang="en">1. Join the group</span></a>
-            <a class="btn" href="https://play.google.com/apps/testing/com.battlegym.app" rel="noopener"><span data-lang="es">2. Acceder a la prueba</span><span data-lang="en">2. Join the test</span></a>
+          <div class="actions" id="access">
+            <a class="btn primary" href="https://groups.google.com/g/battle-gym-testers" target="_blank" rel="noopener noreferrer"><span data-lang="es">1. Unirme al grupo ↗</span><span data-lang="en">1. Join the group ↗</span></a>
+            <a class="btn" href="https://play.google.com/apps/testing/com.battlegym.app" target="_blank" rel="noopener noreferrer"><span data-lang="es">2. Aceptar la prueba ↗</span><span data-lang="en">2. Opt in to the test ↗</span></a>
+            <a class="btn store" href="https://play.google.com/store/apps/details?id=com.battlegym.app" target="_blank" rel="noopener noreferrer"><span data-lang="es">3. Instalar o actualizar ↗</span><span data-lang="en">3. Install or update ↗</span></a>
           </div>
+          <p class="account-note"><span aria-hidden="true">⚠️</span><span><strong data-lang="es">Importante:</strong><strong data-lang="en">Important:</strong> <span data-lang="es">abre los tres pasos con la misma cuenta de Google que usas en Play Store.</span><span data-lang="en">open all three steps with the same Google account used in your Play Store.</span></span></p>
         </div>
         <div class="phone"><div class="screen" role="img" aria-label="Resumen de funciones de Battle Gym"><div class="screen-top"><span>BATTLE GYM</span><span>ES · EN</span></div><h3><span data-lang="es">Tu entrenamiento</span><span data-lang="en">Your workout</span></h3><p class="sub"><span data-lang="es">Rutina sencilla para empezar</span><span data-lang="en">A simple routine to get started</span></p><div class="stat"><strong>873</strong><br><span data-lang="es">ejercicios disponibles</span><span data-lang="en">available exercises</span></div><div class="stat"><strong><span data-lang="es">Progreso</span><span data-lang="en">Progress</span></strong><div class="bar"></div></div><div class="stat">⚡ <span data-lang="es">Funciona sin conexión</span><span data-lang="en">Works offline</span></div></div></div>
       </div>
 
-      <section>
-        <h2><span data-lang="es">Entrar lleva tres pasos</span><span data-lang="en">Join in three steps</span></h2>
+      <section aria-labelledby="join-title">
+        <div class="browser-note" id="browser-note"><strong data-lang="es">¿Has abierto esto desde Instagram?</strong><strong data-lang="en">Did you open this inside Instagram?</strong><br><span data-lang="es">Si Google no reconoce tu cuenta, abre el menú ⋮ y elige “Abrir en Chrome” o “Abrir en navegador externo”.</span><span data-lang="en">If Google does not recognize your account, open the ⋮ menu and choose “Open in Chrome” or “Open in external browser”.</span></div>
+        <h2 id="join-title"><span data-lang="es">Entrar lleva tres pasos</span><span data-lang="en">Join in three steps</span></h2>
         <p class="sub" data-lang="es">Usa en todo el proceso la misma cuenta de Google que tienes configurada en Play Store.</p>
         <p class="sub" data-lang="en">Use the same Google account connected to your Play Store throughout the process.</p>
         <div class="steps">
-          <article class="card"><div class="num">01</div><h3><span data-lang="es">Únete al grupo</span><span data-lang="en">Join the group</span></h3><p><span data-lang="es">El grupo autoriza tu cuenta para acceder a la prueba cerrada.</span><span data-lang="en">The group authorizes your account for the closed test.</span></p></article>
-          <article class="card"><div class="num">02</div><h3><span data-lang="es">Acepta la prueba</span><span data-lang="en">Opt in</span></h3><p><span data-lang="es">Abre el segundo botón y confirma que quieres participar.</span><span data-lang="en">Open the second button and confirm that you want to participate.</span></p></article>
-          <article class="card"><div class="num">03</div><h3><span data-lang="es">Instala y úsala</span><span data-lang="en">Install and use it</span></h3><p><span data-lang="es">Prueba Battle Gym durante 14 días y envíanos feedback privado y sincero.</span><span data-lang="en">Try Battle Gym for 14 days and send us honest private feedback.</span></p></article>
+          <article class="card"><div class="num">01</div><h3><span data-lang="es">Únete al grupo</span><span data-lang="en">Join the group</span></h3><p><span data-lang="es">Pulsa “Unirme al grupo”. Cuando Google confirme que eres miembro, vuelve a esta página.</span><span data-lang="en">Tap “Join the group”. Once Google confirms you are a member, return to this page.</span></p><div class="step-actions"><a class="btn primary" href="https://groups.google.com/g/battle-gym-testers" target="_blank" rel="noopener noreferrer"><span data-lang="es">Abrir el grupo ↗</span><span data-lang="en">Open the group ↗</span></a></div></article>
+          <article class="card"><div class="num">02</div><h3><span data-lang="es">Acepta la prueba</span><span data-lang="en">Opt in</span></h3><p><span data-lang="es">Pulsa el botón, comprueba la cuenta de Google y confirma “Convertirme en tester”.</span><span data-lang="en">Tap the button, check your Google account and confirm “Become a tester”.</span></p><div class="step-actions"><a class="btn" href="https://play.google.com/apps/testing/com.battlegym.app" target="_blank" rel="noopener noreferrer"><span data-lang="es">Aceptar la prueba ↗</span><span data-lang="en">Opt in to the test ↗</span></a></div></article>
+          <article class="card"><div class="num">03</div><h3><span data-lang="es">Instala y úsala</span><span data-lang="en">Install and use it</span></h3><p><span data-lang="es">Google Play mostrará Battle Gym 1.1. Instálala o pulsa “Actualizar” si ya la tienes.</span><span data-lang="en">Google Play will show Battle Gym 1.1. Install it or tap “Update” if you already have it.</span></p><div class="step-actions"><a class="btn store" href="https://play.google.com/store/apps/details?id=com.battlegym.app" target="_blank" rel="noopener noreferrer"><span data-lang="es">Abrir Google Play ↗</span><span data-lang="en">Open Google Play ↗</span></a></div></article>
         </div>
+        <p class="flow-help"><strong data-lang="es">Si aparece “Aplicación no disponible”:</strong><strong data-lang="en">If you see “App not available”:</strong> <span data-lang="es">comprueba que eres miembro del grupo, que has aceptado la prueba y que Play Store utiliza exactamente la misma cuenta. La activación puede tardar unos minutos.</span><span data-lang="en">check that you joined the group, opted in to the test and that Play Store uses the exact same account. Activation may take a few minutes.</span></p>
       </section>
 
       <section>
@@ -101,7 +112,7 @@
         <div class="cta">
           <h2><span data-lang="es">¿Nos ayudas a terminarla?</span><span data-lang="en">Help us finish it</span></h2>
           <p class="sub" style="margin-inline:auto"><span data-lang="es">Buscamos personas reales, no valoraciones positivas. Tu experiencia nos ayudará a corregir fallos antes del lanzamiento.</span><span data-lang="en">We want real people, not positive ratings. Your experience will help us fix problems before launch.</span></p>
-          <div class="actions"><a class="btn primary" href="https://groups.google.com/g/battle-gym-testers" rel="noopener"><span data-lang="es">Quiero probar Battle Gym</span><span data-lang="en">I want to test Battle Gym</span></a></div>
+          <div class="actions"><a class="btn primary" href="#access"><span data-lang="es">Empezar paso a paso</span><span data-lang="en">Start step by step</span></a></div>
           <p class="fine"><span data-lang="es">Participar es gratis. Nunca pedimos una reseña o valoración positiva.</span><span data-lang="en">Participation is free. We never ask for a positive review or rating.</span></p>
         </div>
       </section>
@@ -120,6 +131,8 @@
     document.querySelector('#es').addEventListener('click', () => setLang('es'));
     document.querySelector('#en').addEventListener('click', () => setLang('en'));
     setLang(localStorage.getItem('battle-gym-lang') === 'en' ? 'en' : 'es');
+    if (/Instagram|FBAN|FBAV/i.test(navigator.userAgent)) document.querySelector('#browser-note').classList.add('show');
   </script>
 </body>
 </html>
+
